@@ -4,28 +4,25 @@
 
 
 int main(int argc, char const *argv[]) {
-
-  printf("Size = %zi\n", sizeof(short int));
-
   int i;
   char *msg = "Seguro dental!!!";
   if(argc > 1) {
-    msg = (char *) malloc (sizeof(argv[1])+1);
+    msg = (char *) malloc (strlen(argv[1])+1);
     strcpy(msg,argv[1]);
   }
   int password = 0xa673;
   if(argc > 2) password = (short int ) (atoi(argv[2]) & 0x0000FFFF);
   password |= password << 16;
+
   size_t len = strlen(msg)+1;
+  int n = (len+3)/4;
+
   printf("len = %zi\n", len);
 
   int *intMsg;
-  intMsg = (int *) malloc(((len+3)/4)*sizeof(int)+1);
+  intMsg = (int *) malloc(n*sizeof(int));
   memcpy(intMsg, msg, len*sizeof(char));
-  *(((char *) intMsg) + len) = '\0';
-  printf("copyed %zi into %zi bytes\n", len, ((len+3)/4)*sizeof(int));
 
-  int n = (len+3)/4;
   for(i=0; i<n; ++i) *(intMsg+i) ^= password; 
 
   printf("Ecrypted:  %s\n", (char*) intMsg);
