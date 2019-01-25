@@ -37,20 +37,22 @@
     }
 	  document.getElementById("message").innerHTML = decoded;
   }
-	
+
   </script>
   <link rel="stylesheet" type="text/css" href="imark.css">
 </head>
 
 <body>
   <h1>Primera prueba:</h1>
-  <div style="display: inline-block; vertical-align: text-top; padding-left: 10pt;">
-  	  <button type="button"
-		onclick="decode()">
-	  decodifica</button>
+  <h3>Factoriza números</h3>
+  
+  <div class="onBlack">
+    <p><span>Contraseña: <input type="text" id="inp" /></span>
+  	<button type="button"
+		      onclick="decode()">
+	        Decodificar</button></p>
 
-	  <div style="margin: 1cm;">Contraseña: <input type="text" id="inp" /></div>
-	  <p>Mensaje: <span id="message"></span></p>
+    <p>Mensaje: <span id="message"></span></p>
   </div>
 </body>
 

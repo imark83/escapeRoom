@@ -1,6 +1,14 @@
-ul.exercice li {
-  padding-bottom: 1.5em;
+body {
+  background-image: url("https://www.publicdomainpictures.net/download-picture.php?id=150557&check=20d4513f90fccc8a338cabeba61ae365");
+  background-size: cover;
+  color: #DDDDDD;
 }
+.onBlack {
+  display: inline-block;
+  vertical-align: text-top;
+  padding-left: 10pt;
+}
+
 h1 {
   padding: 5pt;
 }
@@ -11,29 +19,5 @@ p {
 
 button {
   font-size: 15pt;
-}
-
-ul.menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #ddd;
-}
-
-ul.menu li a {
-  display: block;
-  color: #000;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-ul.menu li a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-ul.menu li a:hover:not(.active) {
-  background-color: #333;
-  color: white;
+  border-radius: 5pt;
 }
