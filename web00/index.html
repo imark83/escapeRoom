@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cifras y Letras</title>
+  <meta charset="UTF-8">
+  <meta name="author" content="Marcos Rodríguez">
+
+  <script>
+  var len = 4*4;
+  var password = 0;
+  // var password = 1537;
+  var msg = [0x44434241, 0x41414141, 0x41414141, 0x41414141];
+  // var msg = [1936089938, 1109485939, 1735747684, 100730477];
+  var decoded = "";
+  var i;
+  for(i=0; i<4; i++) {
+    var c1 = ((msg[i] & 0x000000FF)^(password & 0x00FF));
+    var c2 = ((msg[i] & 0x0000FF00)^(password & 0xFF00))>>8;
+    var c3 = ((msg[i] & 0x00FF0000)^((password & 0x00FF)<<8))>>16;
+    var c4 = ((msg[i] & 0xFF000000)^((password & 0xFF00)<<8))>>24;
+
+    decoded = decoded + String.fromCharCode(c1);
+    decoded = decoded + String.fromCharCode(c2);
+    decoded = decoded + String.fromCharCode(c3);
+    decoded = decoded + String.fromCharCode(c4);
+  }
+	function decode() {	  
+	  document.getElementById("message").innerHTML = decoded;
+  }
+	
+  </script>
+  <link rel="stylesheet" type="text/css" href="imark.css">
+</head>
+
+<body>
+  <h1>Primera contraseña:</h1>
+  <div style="display: inline-block; vertical-align: text-top; padding-left: 10pt;">
+  	  <button type="button"
+		onclick="decode()">
+	  decodifica</button>
+
+	  <p>Mensaje: <span id="message"></span></p>
+  </div>
+</body>
+
+</html>
