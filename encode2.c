@@ -10,11 +10,14 @@ int main(int argc, char const *argv[]) {
     msg = (char *) malloc (strlen(argv[1])+1);
     strcpy(msg,argv[1]);
   }
-  int password = 0xa673;
-  if(argc > 2) password = (short int ) (atoi(argv[2]) & 0x0000FFFF);
-  password |= password << 16;
+  char *password = "palabra";
+  if(argc > 2) {
+  	password = (char*) malloc(strlen(argv[2])+1);
+  	strcpy(password, argv[2]);
+  }
 
   size_t len = strlen(msg)+1;
+  size_t pwdLen = strlen(password);
   int n = (len+3)/4;
 
   printf("len = %zi\n", len);
@@ -23,15 +26,15 @@ int main(int argc, char const *argv[]) {
   intMsg = (int *) malloc(n*sizeof(int));
   memcpy(intMsg, msg, len*sizeof(char));
 
-  for(i=0; i<n; ++i) *(intMsg+i) ^= password; 
+  for(i=0; i<n*4; ++i) *(((char*) intMsg)+i) ^= *(password+(i%pwdLen)); 
 
   printf("Ecrypted:  %s\n", (char*) intMsg);
   printf("numbers:\n");
   for(i=0; i<n; ++i)
     printf("    %12i\n", *(intMsg+i));
-  printf("password:\n%hu\n", password);
+  printf("password:\n\t%s\n", password);
 
-  for(i=0; i<n; ++i) *(intMsg+i) ^= password; 
+  for(i=0; i<n*4; ++i) *(((char*) intMsg)+i) ^= *(password + (i%pwdLen)); 
 
   printf("Decrypted: %s\n", (char*) intMsg);
 
