@@ -8,32 +8,27 @@
 
   <script>
 	function decode() {
-	  var password = document.getElementById('inp').value;
-	  // var password = 1537;
+	  // var pwd = document.getElementById('inp').value;
+	  var pwd = "palabra";
       var msg = [
-      1545491714,
-       156782924,
-      1078615068,
-       454102606,
-       441008969,
-      1180653911,
-      1197152853,
-      1518012956,
-      1365071186,
-       174004994,
-       876491838];
+       336266275,
+       339811600,
+        51708420,
+      1079066654,
+      1919050092];
       var decoded = "";
       var i;
+      var j = 0;
       for(i=0; i<msg.length; i++) {
-        var c1 = ((msg[i] & 0x000000FF)^(password & 0x00FF));
-        var c2 = ((msg[i] & 0x0000FF00)^(password & 0xFF00))>>8;
-        var c3 = ((msg[i] & 0x00FF0000)^((password & 0x00FF)<<16))>>16;
-        var c4 = ((msg[i] & 0xFF000000)^((password & 0xFF00)<<16))>>24;
+        var c1 = ((msg[i] & 0x000000FF)^(pwd.charAt(j%pwd.length)));
+        var c2 = (((msg[i]>>8) & 0x000000FF)^(pwd.charAt(j%pwd.length+1)));
+        var c3 = (((msg[i]>>16) & 0x000000FF)^(pwd.charAt(j%pwd.length+2));
+        var c4 = (((msg[i]>>24) & 0x000000FF)^(pwd.charAt(j%pwd.length+3));
 
-      decoded = decoded + String.fromCharCode(c1);
-      decoded = decoded + String.fromCharCode(c2);
-      decoded = decoded + String.fromCharCode(c3);
-      decoded = decoded + String.fromCharCode(c4);
+        decoded = decoded + String.fromCharCode(c1);
+        decoded = decoded + String.fromCharCode(c2);
+        decoded = decoded + String.fromCharCode(c3);
+        decoded = decoded + String.fromCharCode(c4);
     }
 	  document.getElementById("message").innerHTML = decoded;
   }
