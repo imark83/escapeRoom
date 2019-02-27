@@ -1,10 +1,11 @@
 SUBDIRS = cesar
 CC = gcc
 ENCODERS = encode encode2
+LATEX = pdflatex
 
 .PHONY: clean all
 
-all: $(ENCODERS)
+all: $(ENCODERS) poesia softclean
 	for dir in $(SUBDIRS); do \
 		$(MAKE) -C $$dir; \
 	done
@@ -17,12 +18,14 @@ clean:
 		$(MAKE) -C $$dir clean; \
 	done
 
+softclean:
+	rm -f *.aux *.log
 
 %.pdf: %.tex
 	$(LATEX) $<
 
-# poesia:
-# 	$(MAKE) poesia.pdf
+poesia:
+	$(MAKE) poesia.pdf
 
 
 %: %.c

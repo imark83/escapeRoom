@@ -8,34 +8,62 @@
 
   <style type="text/css">
     body {
-      background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Color_To_Ancient_Greece_%2851206494%29.jpeg/800px-Color_To_Ancient_Greece_%2851206494%29.jpeg");
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/9c/Firma_Rafael_Alberti.svg");
       color: black;
     }
   </style>
+
   <script>
 	function decode() {
-	  var pwd = document.getElementById('inp').value;
-	  //var pwd = "palabra";
+	  var password = document.getElementById('inp').value;
+	  // var password = 1023;
       var msg = [
-       336266275,
-       339811600,
-        51708420,
-      1079066654,
-      1919050092];
+      1687843247,
+      1653304714,
+       596731615,
+      1888578716,
+      1721069978,
+       597584525,
+       596470927,
+      1893687955,
+      1787454614,
+      1720413594,
+      1888908255,
+      2061460107,
+       597325279,
+      1893691294,
+      1787454614,
+      1720413594,
+       597573599,
+      1871083404,
+      1625112218,
+      1905291152,
+      1653825989,
+       601712796,
+      1704620439,
+       568278751,
+      1218852793,
+      1706771132,
+       984250257,
+       982074807,
+      1737778327,
+      2006396312,
+      1037922194,
+      1119047098,
+       750995132,
+        67059102];
       var decoded = "";
-      var i=0;
-      var j = 0;
+      var i;
       for(i=0; i<msg.length; i++) {
-        var c1 = (msg[i]&0x000000FF)^(pwd.charCodeAt(j%pwd.length)) ;
-        var c2 = (msg[i]>>8&0x000000FF)^(pwd.charCodeAt((j+1)%pwd.length)) ;
-        var c3 = (msg[i]>>16&0x000000FF)^(pwd.charCodeAt((j+2)%pwd.length)) ;
-        var c4 = (msg[i]>>24&0x000000FF)^(pwd.charCodeAt((j+3)%pwd.length)) ;
+        var c1 = ((msg[i] & 0x000000FF)^(password & 0x00FF));
+        var c2 = ((msg[i] & 0x0000FF00)^(password & 0xFF00))>>8;
+        var c3 = ((msg[i] & 0x00FF0000)^((password & 0x00FF)<<16))>>16;
+        var c4 = ((msg[i] & 0xFF000000)^((password & 0xFF00)<<16))>>24;
 
-        decoded = decoded + String.fromCharCode(c1);
-        decoded = decoded + String.fromCharCode(c2);
-        decoded = decoded + String.fromCharCode(c3);
-        decoded = decoded + String.fromCharCode(c4);
-        j=j+4;
+      decoded = decoded + String.fromCharCode(c1);
+      decoded = decoded + String.fromCharCode(c2);
+      decoded = decoded + String.fromCharCode(c3);
+      decoded = decoded + String.fromCharCode(c4);
     }
 	  document.getElementById("message").innerHTML = decoded;
   }
@@ -45,16 +73,16 @@
 </head>
 
 <body>
-  <h1>Segunda prueba:</h1>
-  <h3>Raíces de la historia</h3>
+  <h1 style="text-align: center">Segunda prueba:</h1>
+  <h3 style="text-align: center">Lo que dejé por ti&hellip;</h3>
 
-  <div class="onBlack">
-    <p><span>Contraseña: <input type="text" id="inp" /></span>
+  <div>
+    <p style="text-align: center"><span>Contraseña: <input type="text" id="inp" /></span>
   	<button type="button"
 		      onclick="decode()">
 	        Decodificar</button></p>
 
-    <p>Mensaje: <span id="message"></span></p>
+    <p style="text-align: center"><span id="message"></span></p>
   </div>
 </body>
 
