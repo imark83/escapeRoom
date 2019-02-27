@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Segunda prueba</title>
+  <meta charset="UTF-8">
+  <meta name="author" content="Marcos Rodríguez">
+
+  <style type="text/css">
+    body {
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Color_To_Ancient_Greece_%2851206494%29.jpeg/800px-Color_To_Ancient_Greece_%2851206494%29.jpeg");
+      color: black;
+    }
+  </style>
+  <script>
+	function decode() {
+	  var pwd = document.getElementById('inp').value;
+	  //var pwd = "palabra";
+      var msg = [
+       336266275,
+       339811600,
+        51708420,
+      1079066654,
+      1919050092];
+      var decoded = "";
+      var i=0;
+      var j = 0;
+      for(i=0; i<msg.length; i++) {
+        var c1 = (msg[i]&0x000000FF)^(pwd.charCodeAt(j%pwd.length)) ;
+        var c2 = (msg[i]>>8&0x000000FF)^(pwd.charCodeAt((j+1)%pwd.length)) ;
+        var c3 = (msg[i]>>16&0x000000FF)^(pwd.charCodeAt((j+2)%pwd.length)) ;
+        var c4 = (msg[i]>>24&0x000000FF)^(pwd.charCodeAt((j+3)%pwd.length)) ;
+
+        decoded = decoded + String.fromCharCode(c1);
+        decoded = decoded + String.fromCharCode(c2);
+        decoded = decoded + String.fromCharCode(c3);
+        decoded = decoded + String.fromCharCode(c4);
+        j=j+4;
+    }
+	  document.getElementById("message").innerHTML = decoded;
+  }
+
+  </script>
+  <link rel="stylesheet" type="text/css" href="imark.css">
+</head>
+
+<body>
+  <h1>Tercera prueba:</h1>
+  <h3>Raíces de la historia</h3>
+
+  <div class="onBlack">
+    <p><span>Contraseña: <input type="text" id="inp" /></span>
+  	<button type="button"
+		      onclick="decode()">
+	        Decodificar</button></p>
+
+    <p>Mensaje: <span id="message"></span></p>
+  </div>
+</body>
+
+</html>
