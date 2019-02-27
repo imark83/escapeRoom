@@ -17,5 +17,13 @@ clean:
 		$(MAKE) -C $$dir clean; \
 	done
 
+
+%.pdf: %.tex
+	$(LATEX) $<
+
+# poesia:
+# 	$(MAKE) poesia.pdf
+
+
 %: %.c
 	$(CC) -o $@ $<
