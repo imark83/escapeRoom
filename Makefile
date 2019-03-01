@@ -1,7 +1,7 @@
 SUBDIRS = cesar
 CC = gcc
 ENCODERS = encode encode2
-DOCS = factores poesia
+DOCS = factores poesia crucigrama
 LATEX = pdflatex
 
 .PHONY: clean all
@@ -27,11 +27,8 @@ softclean:
 %.pdf: %.tex
 	$(LATEX) $<
 
-poesia:
-	$(MAKE) poesia.pdf
-factores:
-	$(MAKE) factores.pdf
-
+$(DOCS) :
+	$(MAKE) $@.pdf
 
 %: %.c
 	$(CC) -o $@ $<
